@@ -25,7 +25,17 @@ namespace SessionDemo
         {
             services.AddControllersWithViews();
 
-            //services.AddSession
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.Name = "MyAppCookie";
+                options.Cookie.IsEssential = true;
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
