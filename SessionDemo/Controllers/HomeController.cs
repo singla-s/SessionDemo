@@ -20,6 +20,8 @@ namespace SessionDemo.Controllers
 
         public IActionResult Index()
         {
+            var sessionId = HttpContext.Session.Id;
+            ViewBag.SessionId = sessionId;
             return View();
         }
 
